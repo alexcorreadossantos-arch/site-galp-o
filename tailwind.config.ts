@@ -58,6 +58,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontFamily: {
+        display: ['"Playfair Display"', 'serif'],
+        elegant: ['"Cormorant Garamond"', 'serif'],
+        sans: ['Raleway', 'sans-serif'],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
