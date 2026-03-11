@@ -146,6 +146,96 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ── COLEÇÃO ── */}
+      <section className="py-28 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Feito à Mão, Peça por Peça</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+            Nossa Coleção
+            <span className="block italic font-normal text-gold text-3xl mt-1">Exclusiva</span>
+          </h2>
+          <p className="font-elegant text-lg text-foreground/60 mt-4 max-w-xl mx-auto">
+            Cada peça é única — nascida da combinação entre madeira nobre e resina epóxi cristalina.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              img: riverTableImg,
+              tag: "Destaque",
+              title: "River Table",
+              sub: "Mesa Epóxi",
+              desc: "Mesa jantar com live edge e resina cristalina. Peça principal da coleção, totalmente exclusiva.",
+              badge: "Sob Medida",
+            },
+            {
+              img: relogioImg,
+              tag: "Novo",
+              title: "Relógio de Parede",
+              sub: "Madeira + Resina",
+              desc: "Disco de madeira com resina oceânica e ponteiros dourados. Arte funcional para sua parede.",
+              badge: "Artesanal",
+            },
+            {
+              img: tabuaImg,
+              tag: "Popular",
+              title: "Tábua de Churrasco",
+              sub: "Resina Colorida",
+              desc: "Tábua em madeira maciça com incrustações de resina vibrante. Perfeita para presentear.",
+              badge: "Premium",
+            },
+            {
+              img: abridorImg,
+              tag: "Exclusivo",
+              title: "Abridor Magnético",
+              sub: "Parede Epóxi",
+              desc: "Abridor de parede em tronco com resina e imã embutido que captura as tampinhas.",
+              badge: "Único",
+            },
+          ].map((produto) => (
+            <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500">
+              {/* Image */}
+              <div className="relative overflow-hidden aspect-square">
+                <img
+                  src={produto.img}
+                  alt={produto.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                {/* Tag */}
+                <div className="absolute top-3 left-3">
+                  <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold">
+                    {produto.tag}
+                  </span>
+                </div>
+                {/* Badge */}
+                <div className="absolute top-3 right-3">
+                  <span className="text-[10px] tracking-widest uppercase px-2 py-1 bg-background/80 text-muted-foreground border border-[hsl(var(--border))]">
+                    {produto.badge}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-5 space-y-3">
+                <div>
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>
+                  <h3 className="font-display text-xl font-semibold text-foreground">{produto.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground font-elegant leading-relaxed">{produto.desc}</p>
+                <div className="pt-2">
+                  <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
+                  <button className="w-full py-2.5 border border-gold-muted text-gold text-xs tracking-[0.2em] uppercase font-light hover:bg-[hsl(var(--gold)/0.08)] hover:border-gold transition-all duration-300">
+                    Solicitar Orçamento
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── PROCESS ── */}
       <section className="py-24 bg-card">
         <div className="max-w-6xl mx-auto px-6">
