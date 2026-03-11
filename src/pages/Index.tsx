@@ -1,4 +1,8 @@
 import heroVideo from "@/assets/galpao360-river-table.mp4";
+import relogioImg from "@/assets/relogio-parede-resina.jpg";
+import tabuaImg from "@/assets/tabua-churrasco-resina.jpg";
+import abridorImg from "@/assets/abridor-magnetico-resina.jpg";
+import riverTableImg from "@/assets/river-table-produto.jpg";
 import { useEffect, useRef, useState } from "react";
 
 const Index = () => {
