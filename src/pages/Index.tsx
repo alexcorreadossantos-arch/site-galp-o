@@ -1,20 +1,46 @@
-import heroVideo from "@/assets/galpao360-river-table.mp4";
-import relogioImg from "@/assets/relogio-parede-resina.jpg";
-import tabuaImg from "@/assets/tabua-churrasco-resina.jpg";
+import heroVideo from "@/assets/hero-video-new.mp4";
+import relogioImg from "@/assets/relogio-parede-novo.jpg";
+import tabuaImg from "@/assets/tabua-churrasco-nova.jpg";
 import abridorImg from "@/assets/abridor-magnetico-resina.jpg";
-import riverTableImg from "@/assets/river-table-produto.jpg";
+import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
+import { X, ZoomIn, ZoomOut } from "lucide-react";
 
 const Index = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const featuredRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       video.addEventListener("canplay", () => setVideoLoaded(true));
     }
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const getParallaxShift = () => {
+    if (!featuredRef.current) return 0;
+    const rect = featuredRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Calculate how far through the viewport the element is
+    const elementCenter = rect.top + rect.height / 2;
+    const viewportCenter = windowHeight / 2;
+    const distanceFromCenter = elementCenter - viewportCenter;
+    
+    // Return a subtle translation value
+    return distanceFromCenter * 0.1;
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -28,7 +54,7 @@ const Index = () => {
           muted
           loop
           playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? "opacity-60" : "opacity-0"}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 scale-[1.12] origin-center ${videoLoaded ? "opacity-60" : "opacity-0"}`}
         />
 
         {/* Overlay gradient */}
@@ -37,14 +63,7 @@ const Index = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          {/* Logo / Brand */}
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[hsl(var(--gold))]" />
-            <span className="text-xs tracking-[0.4em] font-light text-gold uppercase">
-              Since 2018
-            </span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[hsl(var(--gold))]" />
-          </div>
+
 
           <h1 className="font-display text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight">
             <span className="block text-foreground">Galpão 360</span>
@@ -54,14 +73,20 @@ const Index = () => {
           </h1>
 
           <p className="font-elegant text-xl md:text-2xl font-light text-foreground/70 mt-6 mb-10 italic tracking-wide">
-            Madeira viva. Resina cristalina. Arte que dura gerações.
+            A exclusividade da natureza refletindo a sua personalidade.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-10 py-4 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold">
+            <button 
+              onClick={() => document.getElementById('colecao')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-4 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold"
+            >
               Ver Coleção
             </button>
-            <button className="px-10 py-4 border border-gold-muted text-gold font-light tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:border-gold hover:bg-[hsl(var(--gold)/0.08)]">
+            <button 
+              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-4 border border-gold-muted text-gold font-light tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:border-gold hover:bg-[hsl(var(--gold)/0.08)]"
+            >
               Solicitar Orçamento
             </button>
           </div>
@@ -76,12 +101,14 @@ const Index = () => {
 
       {/* ── INTRO STRIP ── */}
       <section className="py-6 border-y border-gold-muted overflow-hidden">
-        <div className="flex gap-16 animate-none whitespace-nowrap px-8">
-          {["River Tables", "Epoxy Resin Art", "Live Edge", "Handcrafted", "Peças Exclusivas", "Design Premium", "Madeira Natural", "Acabamento Artesanal"].map((item, i) => (
-            <span key={i} className="text-xs tracking-[0.3em] uppercase text-muted-foreground inline-flex items-center gap-6">
-              {item}
-              {i < 7 && <span className="text-gold">✦</span>}
-            </span>
+        <div className="w-full flex flex-wrap gap-8 md:gap-16 justify-center items-center px-4">
+          {["Peças Exclusivas", "Madeira Natural", "Acabamento Artesanal"].map((item, i) => (
+            <div key={i} className="flex items-center gap-8 md:gap-16">
+              <span className="text-xs tracking-[0.3em] uppercase text-muted-foreground whitespace-nowrap">
+                {item}
+              </span>
+              {i < 2 && <span className="text-gold text-xs">✦</span>}
+            </div>
           ))}
         </div>
       </section>
@@ -89,18 +116,24 @@ const Index = () => {
       {/* ── FEATURED PIECE ── */}
       <section className="py-28 px-6 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Video preview card */}
-          <div className="relative group">
+          <div className="relative group" ref={featuredRef}>
             <div className="absolute -inset-1 bg-gradient-gold opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
-            <div className="relative overflow-hidden border border-gold-muted">
-              <video
-                src={heroVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full aspect-video object-cover"
+            <div 
+              className="relative overflow-hidden border border-gold-muted aspect-video cursor-zoom-in"
+              onClick={() => setSelectedImage(riverTableImg)}
+            >
+              <img
+                src={riverTableImg}
+                alt="Peça Destaque River Table"
+                className="w-full h-[120%] object-cover animate-ken-burns absolute -top-[10%]"
+                style={{ 
+                  transform: `translateY(${getParallaxShift()}px) scale(1.1)` 
+                }}
               />
+              {/* Shimmer Effect for a "live" feel */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
@@ -114,8 +147,8 @@ const Index = () => {
             <div>
               <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Destaque da Coleção</p>
               <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-                River Table
-                <span className="block italic font-normal text-gold text-3xl mt-1">Epoxy Cristalino</span>
+                Mesa River Table
+                <span className="block italic font-normal text-gold text-3xl mt-1">cor Azul Centauro</span>
               </h2>
             </div>
 
@@ -128,7 +161,7 @@ const Index = () => {
             <div className="grid grid-cols-2 gap-4">
               {[
                 { label: "Material", value: "Madeira Nobre + Resina Epóxi" },
-                { label: "Acabamento", value: "Premium Ultramate / Gloss" },
+                { label: "Acabamento", value: "Fosco / Acetinado" },
                 { label: "Personalização", value: "100% sob medida" },
                 { label: "Garantia", value: "Vitalícia" },
               ].map((spec) => (
@@ -139,15 +172,12 @@ const Index = () => {
               ))}
             </div>
 
-            <button className="w-full py-4 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:opacity-90">
-              Consultar Disponibilidade →
-            </button>
           </div>
         </div>
       </section>
 
       {/* ── COLEÇÃO ── */}
-      <section className="py-28 px-6 max-w-7xl mx-auto">
+      <section id="colecao" className="py-28 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Feito à Mão, Peça por Peça</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
@@ -155,7 +185,7 @@ const Index = () => {
             <span className="block italic font-normal text-gold text-3xl mt-1">Exclusiva</span>
           </h2>
           <p className="font-elegant text-lg text-foreground/60 mt-4 max-w-xl mx-auto">
-            Cada peça é única — nascida da combinação entre madeira nobre e resina epóxi cristalina.
+            Cada peça é única — combinações que não se repetem
           </p>
         </div>
 
@@ -165,53 +195,55 @@ const Index = () => {
               img: riverTableImg,
               tag: "Destaque",
               title: "River Table",
-              sub: "Mesa Epóxi",
-              desc: "Mesa jantar com live edge e resina cristalina. Peça principal da coleção, totalmente exclusiva.",
+              sub: "",
+              desc: "Mesa jantar. Peça principal da coleção, totalmente exclusiva. Valoriza o ambiente.",
               badge: "Sob Medida",
             },
             {
               img: relogioImg,
               tag: "Novo",
               title: "Relógio de Parede",
-              sub: "Madeira + Resina",
-              desc: "Disco de madeira com resina oceânica e ponteiros dourados. Arte funcional para sua parede.",
+              sub: "",
+              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis. Uma arte funcional na parede da sua casa.",
               badge: "Artesanal",
             },
             {
               img: tabuaImg,
               tag: "Popular",
               title: "Tábua de Churrasco",
-              sub: "Resina Colorida",
-              desc: "Tábua em madeira maciça com incrustações de resina vibrante. Perfeita para presentear.",
+              sub: "",
+              desc: "Tábua em madeira que pode ser personalizada em vários formatos. Perfeita para presentear.",
               badge: "Premium",
             },
             {
               img: abridorImg,
               tag: "Exclusivo",
               title: "Abridor Magnético",
-              sub: "Parede Epóxi",
-              desc: "Abridor de parede em tronco com resina e imã embutido que captura as tampinhas.",
+              sub: "",
+              desc: "Abridor de garrafa rustico, com traços únicos, pode ser totalmente customizado. Excelente escolha para o cantinho do churrasco.",
               badge: "Único",
             },
           ].map((produto) => (
             <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500">
               {/* Image */}
-              <div className="relative overflow-hidden aspect-square">
+              <div
+                className="relative overflow-hidden aspect-square cursor-zoom-in"
+                onClick={() => { setSelectedImage(produto.img); setIsZoomed(false); }}
+              >
                 <img
                   src={produto.img}
                   alt={produto.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                {/* Tag */}
-                <div className="absolute top-3 left-3">
-                  <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold">
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+                {/* Tag Overlays */}
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold backdrop-blur-sm">
                     {produto.tag}
                   </span>
                 </div>
-                {/* Badge */}
-                <div className="absolute top-3 right-3">
-                  <span className="text-[10px] tracking-widest uppercase px-2 py-1 bg-background/80 text-muted-foreground border border-[hsl(var(--border))]">
+                <div className="absolute top-3 right-3 z-20">
+                  <span className="text-[10px] tracking-widest uppercase px-2 py-1 bg-background/80 text-muted-foreground border border-[hsl(var(--border))] backdrop-blur-sm">
                     {produto.badge}
                   </span>
                 </div>
@@ -226,7 +258,10 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground font-elegant leading-relaxed">{produto.desc}</p>
                 <div className="pt-2">
                   <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
-                  <button className="w-full py-2.5 border border-gold-muted text-gold text-xs tracking-[0.2em] uppercase font-light hover:bg-[hsl(var(--gold)/0.08)] hover:border-gold transition-all duration-300">
+                  <button 
+                    onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full py-2.5 border border-gold-muted text-gold text-xs tracking-[0.2em] uppercase font-light hover:bg-[hsl(var(--gold)/0.08)] hover:border-gold transition-all duration-300"
+                  >
                     Solicitar Orçamento
                   </button>
                 </div>
@@ -282,7 +317,7 @@ const Index = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section id="contato" className="py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--gold)/0.05)] via-[hsl(var(--gold)/0.02)] to-[hsl(var(--gold)/0.05)]" />
         <div className="relative max-w-3xl mx-auto text-center space-y-8">
           <p className="text-xs tracking-[0.4em] text-gold uppercase">Sua Peça Única Aguarda</p>
@@ -321,6 +356,47 @@ const Index = () => {
           </p>
         </div>
       </footer>
+      {/* ── LIGHTBOX ── */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
+        >
+          {/* Controls */}
+          <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
+            <button 
+              className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
+              onClick={() => setIsZoomed(!isZoomed)}
+              title={isZoomed ? "Zoom Out" : "Zoom In"}
+            >
+              {isZoomed ? <ZoomOut size={24} /> : <ZoomIn size={24} />}
+            </button>
+            <button 
+              className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
+              onClick={() => {
+                setSelectedImage(null);
+                setIsZoomed(false);
+              }}
+            >
+              <X size={24} />
+            </button>
+          </div>
+          
+          <div 
+            className={`relative w-full h-full flex items-center justify-center overflow-hidden cursor-move transition-all duration-500 rounded-lg`}
+            onClick={() => !isZoomed && setSelectedImage(null)}
+          >
+            <img
+              src={selectedImage}
+              alt="Enlarged View"
+              className={`max-w-full max-h-full object-contain shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsZoomed(!isZoomed);
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
