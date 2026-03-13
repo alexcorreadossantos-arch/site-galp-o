@@ -251,7 +251,7 @@ const Index = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-              imgs: [riverTableImg],
+              imgs: [riverTableImg, mesaSlide1, mesaSlide2],
               tag: "Destaque",
               title: "River Table",
               sub: "",
