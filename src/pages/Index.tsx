@@ -17,6 +17,7 @@ import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Instagram, Facebook } from "lucide-react";
+import logoGalpao from "@/assets/logo-galpao.png";
 
 const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (imgs: string[], index: number) => void }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -154,6 +155,11 @@ const Index = () => {
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
 
 
+          <img 
+            src={logoGalpao} 
+            alt="Galpão 360 Logo" 
+            className="w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 animate-in fade-in slide-in-from-top-8 duration-1000 delay-300 opacity-0 fill-mode-forwards drop-shadow-2xl"
+          />
           <h1 className="font-display text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight">
             <span className="block text-foreground">Galpão 360</span>
             <span className="block text-gold italic font-normal text-5xl md:text-7xl mt-2">
