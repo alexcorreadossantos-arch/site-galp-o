@@ -444,7 +444,7 @@ const Index = () => {
             <img
               src={selectedImage}
               alt="Enlarged View"
-              className={`max-w-full max-h-full object-contain shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"}`}
+              className={`w-full h-full max-w-[90vw] max-h-[90vh] object-cover origin-top-left shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-[1.12] cursor-zoom-in"}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsZoomed(!isZoomed);
