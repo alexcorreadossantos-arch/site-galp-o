@@ -263,7 +263,7 @@ const Index = () => {
               {[
                 { label: "Acabamento Alto Brilho", value: "Efeito vitrificado e reflexivo, puro luxo." },
                 { label: "Acetinado Fosco", value: "Toque de seda, evidenciando a textura natural." },
-                { label: "Design Personalizado", value: "Bordas, pés e veios 100% sob medida para você." },
+                { label: "Design Personalizado", value: "Bordas, pés e layout 100% sob medida para você." },
               ].map((spec) => (
                 <div key={spec.label} className="border border-[hsl(var(--border))] p-5 bg-card/50 hover:border-gold transition-colors duration-300">
                   <p className="text-xs text-gold tracking-widest uppercase mb-2">{spec.label}</p>
