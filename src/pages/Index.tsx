@@ -55,8 +55,8 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
             src={img}
             alt={`${title} - view ${index + 1}`}
             className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${imgs.length > 1
-                ? index === currentIndex ? "scale-110" : "scale-100"
-                : "scale-100 group-hover:scale-110"
+              ? index === currentIndex ? "scale-110" : "scale-100"
+              : "scale-100 group-hover:scale-110"
               }`}
           />
         </div>
@@ -155,10 +155,10 @@ const Index = () => {
         <div className="relative text-center px-6 max-w-5xl mx-auto">
 
 
-          <img 
-            src={logoGalpao} 
-            alt="Galpão 360 Logo" 
-            className={`w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 mix-blend-screen transition-all duration-1000 ease-out delay-300 ${videoLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
+          <img
+            src={logoGalpao}
+            alt="Galpão 360 Logo"
+            className={`w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 mix-blend-screen contrast-150 brightness-[1.15] transition-all duration-1000 ease-out delay-300 ${videoLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
           />
           <h1 className="font-display text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight">
             <span className="block text-foreground">Galpão 360</span>
@@ -407,7 +407,7 @@ const Index = () => {
               </div>
               <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Instagram</span>
             </a>
-            
+
             <a href="https://www.facebook.com/galpão360woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-75">
               <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
                 <Facebook size={24} />
@@ -453,8 +453,7 @@ const Index = () => {
       <footer className="border-t border-gold-muted py-10 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="font-display text-lg font-bold text-foreground">
-              Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
+            <p className="font-display text-lg font-bold text-foreground">              Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
             </p>
             <p className="text-xs text-muted-foreground mt-1 tracking-wider">
               Madeira Natural · Resina Epóxi · Design Exclusivo
