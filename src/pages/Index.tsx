@@ -26,7 +26,7 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
 
   return (
     <div 
-      className="relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
+      className="group relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
       onClick={() => onZoom(imgs[currentIndex])}
     >
       {imgs.map((img, index) => (
@@ -40,7 +40,9 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
             src={img}
             alt={`${title} - view ${index + 1}`}
             className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
-              index === currentIndex ? "scale-110" : "scale-100"
+              imgs.length > 1
+                ? index === currentIndex ? "scale-[1.15]" : "scale-[1.05]"
+                : "scale-[1.05] group-hover:scale-[1.10]"
             }`}
           />
         </div>
