@@ -1,4 +1,6 @@
 import heroVideo from "@/assets/hero-video-new.mp4";
+import mesaSlide1 from "@/assets/mesa-slide-1.jpg";
+import mesaSlide2 from "@/assets/mesa-slide-2.jpg";
 import relogioSlide1 from "@/assets/relogio-slide-new-1.jpg";
 import relogioSlide2 from "@/assets/relogio-slide-new-2.jpg";
 import relogioSlide3 from "@/assets/relogio-slide-new-3.jpg";
