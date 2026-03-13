@@ -18,7 +18,7 @@ import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from "lucide-react";
 
-const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (img: string) => void }) => {
+const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (imgs: string[], index: number) => void }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
   return (
     <div
       className="group relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
-      onClick={() => onZoom(imgs[currentIndex])}
+      onClick={() => onZoom(imgs, currentIndex)}
     >
       {imgs.map((img, index) => (
         <div
@@ -99,7 +99,7 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
 const Index = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [lightboxData, setLightboxData] = useState<{imgs: string[], index: number} | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const featuredRef = useRef<HTMLDivElement>(null);
@@ -320,7 +320,7 @@ const Index = () => {
                 <ProductImageSlideshow
                   imgs={produto.imgs}
                   title={produto.title}
-                  onZoom={(img) => { setSelectedImage(img); setIsZoomed(false); }}
+                  onZoom={(imgs, index) => { setLightboxData({imgs, index}); setIsZoomed(false); }}
                 />
 
                 {/* Tag Overlays */}
@@ -444,7 +444,7 @@ const Index = () => {
         </div>
       </footer>
       {/* ── LIGHTBOX ── */}
-      {selectedImage && (
+      {lightboxData && (
         <div
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
         >
@@ -460,7 +460,7 @@ const Index = () => {
             <button
               className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
               onClick={() => {
-                setSelectedImage(null);
+                setLightboxData(null);
                 setIsZoomed(false);
               }}
             >
@@ -470,10 +470,24 @@ const Index = () => {
 
           <div
             className={`relative w-full h-full flex items-center justify-center overflow-hidden cursor-move transition-all duration-500 rounded-lg`}
-            onClick={() => !isZoomed && setSelectedImage(null)}
+            onClick={() => !isZoomed && setLightboxData(null)}
           >
+            {/* Nav Left */}
+            {!isZoomed && lightboxData.imgs.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxData(prev => prev ? { ...prev, index: prev.index === 0 ? prev.imgs.length - 1 : prev.index - 1 } : null);
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/80 transition-all z-20"
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={28} />
+              </button>
+            )}
+
             <img
-              src={selectedImage}
+              src={lightboxData.imgs[lightboxData.index]}
               alt="Enlarged View"
               className={`max-w-full max-h-full object-contain shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"}`}
               onClick={(e) => {
@@ -481,6 +495,20 @@ const Index = () => {
                 setIsZoomed(!isZoomed);
               }}
             />
+
+            {/* Nav Right */}
+            {!isZoomed && lightboxData.imgs.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxData(prev => prev ? { ...prev, index: (prev.index + 1) % prev.imgs.length } : null);
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/80 transition-all z-20"
+                aria-label="Next image"
+              >
+                <ChevronRight size={28} />
+              </button>
+            )}
           </div>
         </div>
       )}
