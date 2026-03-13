@@ -16,7 +16,7 @@ import abridorSlide1 from "@/assets/abridor-slide-1.jpg";
 import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
-import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Instagram, Facebook } from "lucide-react";
+import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Instagram, Facebook, MapPin } from "lucide-react";
 import logoGalpao from "@/assets/logo-galpao.png";
 
 const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (imgs: string[], index: number) => void }) => {
@@ -378,9 +378,9 @@ const Index = () => {
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { step: "01", title: "Seleção da Madeira", desc: "Escolhemos troncos com veios únicos e história, respeitando cada característica natural." },
+              { step: "01", title: "Seleção da Madeira", desc: "Escolhemos madeiras com veios únicos e história, respeitando cada característica natural." },
               { step: "02", title: "Preparação & Cura", desc: "Secagem controlada para garantir estabilidade estrutural e preservar a beleza da madeira." },
-              { step: "03", title: "Aplicação da Resina", desc: "Resina epóxi de alta clareza aplicada em camadas, criando profundidade e luminosidade únicas." },
+              { step: "03", title: "Aplicação da Resina", desc: "Resina epóxi de qualidade aplicada em camadas em ambiente controlado, criando profundidade e luminosidade únicas." },
               { step: "04", title: "Polimento Premium", desc: "Acabamento artesanal que revela todos os detalhes, com proteção duradoura e toque de seda." },
             ].map((item) => (
               <div key={item.step} className="group relative">
@@ -457,14 +457,21 @@ const Index = () => {
       {/* ── FOOTER ── */}
       <footer className="border-t border-gold-muted py-10 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="font-display text-lg font-bold text-foreground">              Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
+          <div className="flex flex-col gap-1">
+            <p className="font-display text-lg font-bold text-foreground">
+              Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
             </p>
-            <p className="text-xs text-muted-foreground mt-1 tracking-wider">
+            <p className="text-xs text-muted-foreground tracking-wider">
               Madeira Natural · Resina Epóxi · Design Exclusivo
             </p>
+            <div className="flex items-center gap-2 mt-2 text-muted-foreground hover:text-gold transition-colors duration-300">
+              <MapPin size={14} className="text-gold" />
+              <p className="text-xs tracking-wide">
+                Vrs 826 km14, Alto Feliz RS - Rio Grande do sul - Brasil
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-muted-foreground tracking-widest">
+          <p className="text-xs text-muted-foreground tracking-widest text-center md:text-right">
             © 2024 Galpão 360 Wood Studio · Todos os direitos reservados
           </p>
         </div>
