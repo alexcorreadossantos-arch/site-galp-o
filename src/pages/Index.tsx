@@ -25,24 +25,23 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
   }, [imgs.length]);
 
   return (
-    <div 
+    <div
       className="group relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
       onClick={() => onZoom(imgs[currentIndex])}
     >
       {imgs.map((img, index) => (
         <div
           key={img}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentIndex ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
         >
           <img
             src={img}
             alt={`${title} - view ${index + 1}`}
-            className={`w-full h-full object-cover origin-top-left transition-transform duration-[6000ms] ease-out ${
+            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
               imgs.length > 1
-                ? index === currentIndex ? "scale-[1.20]" : "scale-[1.12]"
-                : "scale-[1.12] group-hover:scale-[1.18]"
+                ? index === currentIndex ? "scale-110" : "scale-100"
+                : "scale-100 group-hover:scale-110"
             }`}
           />
         </div>
@@ -54,9 +53,8 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
           {imgs.map((_, index) => (
             <div
               key={index}
-              className={`h-1 transition-all duration-300 rounded-full ${
-                index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
-              }`}
+              className={`h-1 transition-all duration-300 rounded-full ${index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
+                }`}
             />
           ))}
         </div>
@@ -91,12 +89,12 @@ const Index = () => {
     if (!featuredRef.current) return 0;
     const rect = featuredRef.current.getBoundingClientRect();
     const windowHeight = window.innerHeight;
-    
+
     // Calculate how far through the viewport the element is
     const elementCenter = rect.top + rect.height / 2;
     const viewportCenter = windowHeight / 2;
     const distanceFromCenter = elementCenter - viewportCenter;
-    
+
     // Return a subtle translation value
     return distanceFromCenter * 0.1;
   };
@@ -136,13 +134,13 @@ const Index = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
+            <button
               onClick={() => document.getElementById('colecao')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-10 py-4 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold"
             >
               Ver Coleção
             </button>
-            <button 
+            <button
               onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-10 py-4 border border-gold-muted text-gold font-light tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:border-gold hover:bg-[hsl(var(--gold)/0.08)]"
             >
@@ -177,7 +175,7 @@ const Index = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="relative group" ref={featuredRef}>
             <div className="absolute -inset-1 bg-gradient-gold opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
-            <div 
+            <div
               className="relative overflow-hidden border border-gold-muted aspect-video cursor-zoom-in"
               onClick={() => setSelectedImage(riverTableImg)}
             >
@@ -185,8 +183,8 @@ const Index = () => {
                 src={riverTableImg}
                 alt="Peça Destaque River Table"
                 className="w-full h-[120%] object-cover animate-ken-burns absolute -top-[10%]"
-                style={{ 
-                  transform: `translateY(${getParallaxShift()}px) scale(1.1)` 
+                style={{
+                  transform: `translateY(${getParallaxShift()}px) scale(1.1)`
                 }}
               />
               {/* Shimmer Effect for a "live" feel */}
@@ -212,8 +210,8 @@ const Index = () => {
             </div>
 
             <p className="font-elegant text-lg text-foreground/70 leading-relaxed">
-              Cada peça nasce da fusão entre a alma da madeira e a eternidade da resina epóxi. 
-              Os veios naturais contam histórias de décadas de crescimento, preservados para sempre 
+              Cada peça nasce da fusão entre a alma da madeira e a eternidade da resina epóxi.
+              Os veios naturais contam histórias de décadas de crescimento, preservados para sempre
               sob camadas de resina cristalina de alta clareza.
             </p>
 
@@ -286,12 +284,12 @@ const Index = () => {
             <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500 flex flex-col">
               {/* Image / Slideshow */}
               <div className="relative">
-                <ProductImageSlideshow 
-                  imgs={produto.imgs} 
-                  title={produto.title} 
-                  onZoom={(img) => { setSelectedImage(img); setIsZoomed(false); }} 
+                <ProductImageSlideshow
+                  imgs={produto.imgs}
+                  title={produto.title}
+                  onZoom={(img) => { setSelectedImage(img); setIsZoomed(false); }}
                 />
-                
+
                 {/* Tag Overlays */}
                 <div className="absolute top-3 left-3 z-20">
                   <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold backdrop-blur-sm">
@@ -314,7 +312,7 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
                 <div className="pt-6 mt-auto">
                   <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
-                  <button 
+                  <button
                     onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
                     className="w-full py-2.5 border border-gold-muted text-gold text-xs tracking-[0.2em] uppercase font-light hover:bg-[hsl(var(--gold)/0.08)] hover:border-gold transition-all duration-300"
                   >
@@ -382,11 +380,11 @@ const Index = () => {
             <span className="block italic font-normal text-gold mt-2">em Obra de Arte</span>
           </h2>
           <p className="font-elegant text-lg text-foreground/60 max-w-xl mx-auto">
-            Entre em contato e inicie a criação da sua peça exclusiva. 
+            Entre em contato e inicie a criação da sua peça exclusiva.
             Cada projeto é único, como você.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <a href="https://wa.me/5500000000000" className="px-12 py-5 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.2em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold inline-block">
+            <a href="https://wa.me/5554996043029" className="px-12 py-5 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.2em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold inline-block">
               WhatsApp Studio
             </a>
             <a href="mailto:contato@galpao360.com" className="px-12 py-5 border border-gold-muted text-gold font-light tracking-[0.2em] uppercase text-sm transition-all duration-300 hover:border-gold inline-block">
@@ -414,19 +412,19 @@ const Index = () => {
       </footer>
       {/* ── LIGHTBOX ── */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
         >
           {/* Controls */}
           <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
-            <button 
+            <button
               className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
               onClick={() => setIsZoomed(!isZoomed)}
               title={isZoomed ? "Zoom Out" : "Zoom In"}
             >
               {isZoomed ? <ZoomOut size={24} /> : <ZoomIn size={24} />}
             </button>
-            <button 
+            <button
               className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
               onClick={() => {
                 setSelectedImage(null);
@@ -436,15 +434,15 @@ const Index = () => {
               <X size={24} />
             </button>
           </div>
-          
-          <div 
+
+          <div
             className={`relative w-full h-full flex items-center justify-center overflow-hidden cursor-move transition-all duration-500 rounded-lg`}
             onClick={() => !isZoomed && setSelectedImage(null)}
           >
             <img
               src={selectedImage}
               alt="Enlarged View"
-              className={`w-full h-full max-w-[90vw] max-h-[90vh] object-cover origin-top-left shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-[1.12] cursor-zoom-in"}`}
+              className={`max-w-full max-h-full object-contain shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsZoomed(!isZoomed);
