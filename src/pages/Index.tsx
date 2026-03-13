@@ -402,7 +402,7 @@ const Index = () => {
               <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Instagram</span>
             </a>
             
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-75">
+            <a href="https://www.facebook.com/galpão360woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-75">
               <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
                 <Facebook size={24} />
               </div>
