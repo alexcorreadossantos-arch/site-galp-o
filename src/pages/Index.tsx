@@ -53,11 +53,10 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
           <img
             src={img}
             alt={`${title} - view ${index + 1}`}
-            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
-              imgs.length > 1
+            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${imgs.length > 1
                 ? index === currentIndex ? "scale-110" : "scale-100"
                 : "scale-100 group-hover:scale-110"
-            }`}
+              }`}
           />
         </div>
       ))}
@@ -74,7 +73,7 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
               />
             ))}
           </div>
-          
+
           {/* Navigation Controls */}
           <button
             onClick={handlePrev}
@@ -99,7 +98,7 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
 const Index = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [lightboxData, setLightboxData] = useState<{imgs: string[], index: number} | null>(null);
+  const [lightboxData, setLightboxData] = useState<{ imgs: string[], index: number } | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const featuredRef = useRef<HTMLDivElement>(null);
@@ -320,7 +319,7 @@ const Index = () => {
                 <ProductImageSlideshow
                   imgs={produto.imgs}
                   title={produto.title}
-                  onZoom={(imgs, index) => { setLightboxData({imgs, index}); setIsZoomed(false); }}
+                  onZoom={(imgs, index) => { setLightboxData({ imgs, index }); setIsZoomed(false); }}
                 />
 
                 {/* Tag Overlays */}
@@ -385,6 +384,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+
       {/* ── SOCIAL MEDIA ── */}
       <section className="py-24 border-y border-gold-muted bg-card/30">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -395,7 +395,7 @@ const Index = () => {
             Acompanhe nosso dia a dia e criações exclusivas
           </p>
           <div className="flex flex-wrap justify-center gap-12 md:gap-20">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500">
+            <a href="https://www.instagram.com/galpao360.woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500">
               <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
                 <Instagram size={24} />
               </div>
@@ -409,7 +409,7 @@ const Index = () => {
               <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Facebook</span>
             </a>
 
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-150">
+            <a href="https://tiktok.com/@galpao360woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-150">
               <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
               </div>
