@@ -215,7 +215,7 @@ const Index = () => {
             <div className="absolute -inset-1 bg-gradient-gold opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
             <div
               className="relative overflow-hidden border border-gold-muted aspect-video cursor-zoom-in"
-              onClick={() => setSelectedImage(riverTableImg)}
+              onClick={() => { setLightboxData({ imgs: [riverTableImg], index: 0 }); setIsZoomed(false); }}
             >
               <img
                 src={riverTableImg}
