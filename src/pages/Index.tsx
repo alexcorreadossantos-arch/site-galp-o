@@ -1,10 +1,12 @@
 import heroVideo from "@/assets/hero-video-new.mp4";
-import mesaSlide1 from "@/assets/mesa-slide-1.jpg";
-import mesaSlide2 from "@/assets/mesa-slide-2.jpg";
 import relogioSlide1 from "@/assets/relogio-slide-new-1.jpg";
 import relogioSlide2 from "@/assets/relogio-slide-new-2.jpg";
 import relogioSlide3 from "@/assets/relogio-slide-new-3.jpg";
 import relogioSlide4 from "@/assets/relogio-slide-new-4.jpg";
+import mesaSlide1 from "@/assets/mesa-slide-1.jpg";
+import mesaSlide2 from "@/assets/mesa-slide-2.jpg";
+import mesaSlide3 from "@/assets/mesa-slide-3.jpg";
+import mesaSlide4 from "@/assets/mesa-slide-4.jpg";
 import tabua1 from "@/assets/tabua-slide-1.jpg";
 import tabua2 from "@/assets/tabua-slide-2.jpg";
 import tabua3 from "@/assets/tabua-slide-3.jpg";
@@ -251,7 +253,7 @@ const Index = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-              imgs: [riverTableImg, mesaSlide1, mesaSlide2],
+              imgs: [mesaSlide1, mesaSlide2, mesaSlide3, mesaSlide4],
               tag: "Destaque",
               title: "River Table",
               sub: "",
@@ -263,8 +265,8 @@ const Index = () => {
               tag: "Novo",
               title: "Relógio de Parede",
               sub: "",
-              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis: 33, 43, 53cm de diâmetro. Uma arte funcional na parede da sua casa.",
-              badge: "Personalizável",
+              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis. Uma arte funcional na parede da sua casa.",
+              badge: "Artesanal",
             },
             {
               imgs: [tabua1, tabua2, tabua3, tabua4, tabua5],
@@ -309,9 +311,9 @@ const Index = () => {
               <div className="p-5 flex flex-col flex-grow">
                 <div className="mb-3">
                   {produto.sub && <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>}
-                  <h3 className="font-display text-2xl font-semibold text-foreground">{produto.title}</h3>
+                  <h3 className="font-display text-xl font-semibold text-foreground">{produto.title}</h3>
                 </div>
-                <p className="text-base text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
+                <p className="text-sm text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
                 <div className="pt-6 mt-auto">
                   <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
                   <button
