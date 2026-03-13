@@ -158,7 +158,7 @@ const Index = () => {
           <img 
             src={logoGalpao} 
             alt="Galpão 360 Logo" 
-            className="w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 animate-in fade-in slide-in-from-top-8 duration-1000 delay-300 opacity-0 fill-mode-forwards drop-shadow-2xl"
+            className={`w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 drop-shadow-2xl transition-all duration-1000 ease-out delay-300 ${videoLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
           />
           <h1 className="font-display text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight">
             <span className="block text-foreground">Galpão 360</span>
