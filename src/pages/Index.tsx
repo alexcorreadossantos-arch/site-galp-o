@@ -252,7 +252,7 @@ const Index = () => {
                 Imagine a força bruta da natureza capturada em um instante de pura eternidade. <strong>Este exemplar</strong> da nossa coleção, a River Table Azul Centauro, não é apenas um móvel; é uma união ousada entre o peso visual da madeira maciça e a modernidade vibrante do epóxi.
               </p>
               <p>
-                Os veios naturais e as bordas trabalhadas e elegantes da madeira contam histórias de sobrevivência e tempo, agora preservadas para sempre sob um fluxo intenso e magnético de resina epóxi na cor <span className="text-gold italic">Azul Centauro</span> — uma tonalidade profunda que reflete a beleza enigmática dos oceanos não mapeados.
+                Os veios naturais e as bordas trabalhadas e elegantes da madeira contam histórias de sobrevivência e tempo, valorizadas pelo acabamento sólido e pela profundidade da resina epóxi em sua tonalidade <span className="text-gold italic">Azul Centauro</span>.
               </p>
               <p>
                 A exclusividade dessa peça se eleva pela arte da finalização. Oferecemos <strong>diversos tipos de acabamentos premium</strong> para que a mesa harmonize perfeitamente com a sua essência:
