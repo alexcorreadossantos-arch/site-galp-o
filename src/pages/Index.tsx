@@ -41,8 +41,8 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
             alt={`${title} - view ${index + 1}`}
             className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
               imgs.length > 1
-                ? index === currentIndex ? "scale-[1.15]" : "scale-[1.05]"
-                : "scale-[1.05] group-hover:scale-[1.10]"
+                ? index === currentIndex ? "scale-[1.20]" : "scale-[1.10]"
+                : "scale-[1.10] group-hover:scale-[1.15]"
             }`}
           />
         </div>
