@@ -294,7 +294,7 @@ const Index = () => {
               tag: "Novo",
               title: "Relógio de Parede",
               sub: "",
-              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis. Uma arte funcional na parede da sua casa.",
+              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis: 35cm, 45cm ou 55cm de diâmetro. Uma arte funcional na parede da sua casa.",
               badge: "Artesanal",
             },
             {
