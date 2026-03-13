@@ -1,8 +1,8 @@
 import heroVideo from "@/assets/hero-video-new.mp4";
-import relogioImg from "@/assets/relogio-parede-novo.jpg";
-import relogioSlide1 from "@/assets/relogio-slide-1.jpg";
-import relogioSlide2 from "@/assets/relogio-slide-2.jpg";
-import relogioSlide3 from "@/assets/relogio-slide-3.jpg";
+import relogioSlide1 from "@/assets/relogio-slide-new-1.jpg";
+import relogioSlide2 from "@/assets/relogio-slide-new-2.jpg";
+import relogioSlide3 from "@/assets/relogio-slide-new-3.jpg";
+import relogioSlide4 from "@/assets/relogio-slide-new-4.jpg";
 import tabua1 from "@/assets/tabua-slide-1.jpg";
 import tabua2 from "@/assets/tabua-slide-2.jpg";
 import tabua3 from "@/assets/tabua-slide-3.jpg";
@@ -257,7 +257,7 @@ const Index = () => {
               badge: "Sob Medida",
             },
             {
-              imgs: [relogioImg, relogioSlide1, relogioSlide2, relogioSlide3],
+              imgs: [relogioSlide1, relogioSlide2, relogioSlide3, relogioSlide4],
               tag: "Novo",
               title: "Relógio de Parede",
               sub: "",
