@@ -16,7 +16,7 @@ import abridorSlide1 from "@/assets/abridor-slide-1.jpg";
 import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
-import { X, ZoomIn, ZoomOut } from "lucide-react";
+import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (img: string) => void }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,6 +28,16 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
     }, 4000);
     return () => clearInterval(timer);
   }, [imgs.length]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? imgs.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % imgs.length);
+  };
 
   return (
     <div
@@ -54,15 +64,33 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
       {/* Indicators */}
       {imgs.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-          {imgs.map((_, index) => (
-            <div
-              key={index}
-              className={`h-1 transition-all duration-300 rounded-full ${index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
-                }`}
-            />
-          ))}
-        </div>
+        <>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+            {imgs.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1 transition-all duration-300 rounded-full ${index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
+                  }`}
+              />
+            ))}
+          </div>
+          
+          {/* Navigation Controls */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40 z-20"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40 z-20"
+            aria-label="Next image"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </>
       )}
     </div>
   );
