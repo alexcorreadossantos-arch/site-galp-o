@@ -247,22 +247,27 @@ const Index = () => {
               </h2>
             </div>
 
-            <p className="font-elegant text-lg text-foreground/70 leading-relaxed">
-              Cada peça nasce da fusão entre a alma da madeira e a eternidade da resina epóxi.
-              Os veios naturais contam histórias de décadas de crescimento, preservados para sempre
-              sob camadas de resina cristalina de alta clareza.
-            </p>
+            <div className="space-y-6 font-elegant text-lg text-foreground/80 leading-relaxed">
+              <p>
+                Imagine a força bruta da natureza capturada em um instante de pura eternidade. A nossa <strong>River Table Azul Centauro</strong> não é apenas um móvel; é um fragmento de rio cristalizado atravessando o coração de uma madeira nobre centenária.
+              </p>
+              <p>
+                Os veios naturais e as bordas orgânicas (live edge) contam histórias de sobrevivência e tempo, agora preservadas para sempre sob um fluxo intenso e magnético de resina epóxi na cor <span className="text-gold italic">Azul Centauro</span> — uma tonalidade profunda que reflete a beleza enigmática dos oceanos não mapeados.
+              </p>
+              <p>
+                A exclusividade dessa peça se eleva pela arte da finalização. Oferecemos <strong>diversos tipos de acabamentos premium</strong> para que a mesa harmonize perfeitamente com a sua essência:
+              </p>
+            </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               {[
-                { label: "Material", value: "Madeira Nobre + Resina Epóxi" },
-                { label: "Acabamento", value: "Fosco / Acetinado" },
-                { label: "Personalização", value: "100% sob medida" },
-                { label: "Garantia", value: "Vitalícia" },
+                { label: "Acabamento Alto Brilho", value: "Efeito vitrificado e reflexivo, puro luxo." },
+                { label: "Acetinado Fosco", value: "Toque de seda, evidenciando a textura natural." },
+                { label: "Design Personalizado", value: "Bordas, pés e veios 100% sob medida para você." },
               ].map((spec) => (
-                <div key={spec.label} className="border border-[hsl(var(--border))] p-4 bg-card">
-                  <p className="text-xs text-muted-foreground tracking-widest uppercase mb-1">{spec.label}</p>
-                  <p className="text-sm font-medium text-foreground/90">{spec.value}</p>
+                <div key={spec.label} className="border border-[hsl(var(--border))] p-5 bg-card/50 hover:border-gold transition-colors duration-300">
+                  <p className="text-xs text-gold tracking-widest uppercase mb-2">{spec.label}</p>
+                  <p className="text-sm font-light text-foreground/80">{spec.value}</p>
                 </div>
               ))}
             </div>
