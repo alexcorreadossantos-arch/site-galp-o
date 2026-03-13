@@ -1,10 +1,67 @@
 import heroVideo from "@/assets/hero-video-new.mp4";
 import relogioImg from "@/assets/relogio-parede-novo.jpg";
-import tabuaImg from "@/assets/tabua-churrasco-nova.jpg";
+import relogioSlide1 from "@/assets/relogio-slide-1.jpg";
+import relogioSlide2 from "@/assets/relogio-slide-2.jpg";
+import relogioSlide3 from "@/assets/relogio-slide-3.jpg";
+import tabua1 from "@/assets/tabua-slide-1.jpg";
+import tabua2 from "@/assets/tabua-slide-2.jpg";
+import tabua3 from "@/assets/tabua-slide-3.jpg";
+import tabua4 from "@/assets/tabua-slide-4.jpg";
+import tabua5 from "@/assets/tabua-slide-5.jpg";
 import abridorImg from "@/assets/abridor-magnetico-resina.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn, ZoomOut } from "lucide-react";
+
+const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (img: string) => void }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (imgs.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % imgs.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [imgs.length]);
+
+  return (
+    <div 
+      className="relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
+      onClick={() => onZoom(imgs[currentIndex])}
+    >
+      {imgs.map((img, index) => (
+        <div
+          key={img}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === currentIndex ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <img
+            src={img}
+            alt={`${title} - view ${index + 1}`}
+            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
+              index === currentIndex ? "scale-110" : "scale-100"
+            }`}
+          />
+        </div>
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+      {/* Indicators */}
+      {imgs.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {imgs.map((_, index) => (
+            <div
+              key={index}
+              className={`h-1 transition-all duration-300 rounded-full ${
+                index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Index = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -192,7 +249,7 @@ const Index = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-              img: riverTableImg,
+              imgs: [riverTableImg],
               tag: "Destaque",
               title: "River Table",
               sub: "",
@@ -200,7 +257,7 @@ const Index = () => {
               badge: "Sob Medida",
             },
             {
-              img: relogioImg,
+              imgs: [relogioImg, relogioSlide1, relogioSlide2, relogioSlide3],
               tag: "Novo",
               title: "Relógio de Parede",
               sub: "",
@@ -208,7 +265,7 @@ const Index = () => {
               badge: "Artesanal",
             },
             {
-              img: tabuaImg,
+              imgs: [tabua1, tabua2, tabua3, tabua4, tabua5],
               tag: "Popular",
               title: "Tábua de Churrasco",
               sub: "",
@@ -216,7 +273,7 @@ const Index = () => {
               badge: "Premium",
             },
             {
-              img: abridorImg,
+              imgs: [abridorImg],
               tag: "Exclusivo",
               title: "Abridor Magnético",
               sub: "",
@@ -224,18 +281,15 @@ const Index = () => {
               badge: "Único",
             },
           ].map((produto) => (
-            <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500">
-              {/* Image */}
-              <div
-                className="relative overflow-hidden aspect-square cursor-zoom-in"
-                onClick={() => { setSelectedImage(produto.img); setIsZoomed(false); }}
-              >
-                <img
-                  src={produto.img}
-                  alt={produto.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500 flex flex-col">
+              {/* Image / Slideshow */}
+              <div className="relative">
+                <ProductImageSlideshow 
+                  imgs={produto.imgs} 
+                  title={produto.title} 
+                  onZoom={(img) => { setSelectedImage(img); setIsZoomed(false); }} 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+                
                 {/* Tag Overlays */}
                 <div className="absolute top-3 left-3 z-20">
                   <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold backdrop-blur-sm">
@@ -250,13 +304,13 @@ const Index = () => {
               </div>
 
               {/* Content */}
-              <div className="p-5 space-y-3">
-                <div>
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>
+              <div className="p-5 flex flex-col flex-grow">
+                <div className="mb-3">
+                  {produto.sub && <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>}
                   <h3 className="font-display text-xl font-semibold text-foreground">{produto.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground font-elegant leading-relaxed">{produto.desc}</p>
-                <div className="pt-2">
+                <p className="text-sm text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
+                <div className="pt-6 mt-auto">
                   <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
                   <button 
                     onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
