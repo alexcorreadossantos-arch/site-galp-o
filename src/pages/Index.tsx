@@ -440,7 +440,7 @@ const Index = () => {
             <span className="block italic font-normal text-gold mt-2">em Obra de Arte</span>
           </h2>
           <p className="font-elegant text-lg text-foreground/60 max-w-xl mx-auto">
-            Entre em contato e inicie a criação da sua peça exclusiva.
+            Entre em contato e transformamos sua ideia em peça exclusiva.
             Cada projeto é único, como você.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -455,23 +455,25 @@ const Index = () => {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-gold-muted py-10 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col gap-1">
+      <footer className="border-t border-gold-muted py-12 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-6">
+          <div className="flex flex-col gap-1 items-center">
             <p className="font-display text-lg font-bold text-foreground">
               Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
             </p>
             <p className="text-xs text-muted-foreground tracking-wider">
               Madeira Natural · Resina Epóxi · Design Exclusivo
             </p>
-            <div className="flex items-center gap-2 mt-2 text-muted-foreground hover:text-gold transition-colors duration-300">
-              <MapPin size={14} className="text-gold" />
-              <p className="text-xs tracking-wide">
-                Vrs 826 km14, Alto Feliz RS - Rio Grande do sul - Brasil
-              </p>
-            </div>
           </div>
-          <p className="text-xs text-muted-foreground tracking-widest text-center md:text-right">
+          
+          <div className="flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors duration-300 bg-background/20 px-4 py-2 rounded-full border border-gold/10">
+            <MapPin size={14} className="text-gold" />
+            <p className="text-xs tracking-wide">
+              Vrs 826 km14, Alto Feliz RS - Rio Grande do sul - Brasil
+            </p>
+          </div>
+
+          <p className="text-xs text-muted-foreground tracking-widest mt-2">
             © 2024 Galpão 360 Wood Studio · Todos os direitos reservados
           </p>
         </div>
