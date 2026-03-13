@@ -249,10 +249,10 @@ const Index = () => {
 
             <div className="space-y-6 font-elegant text-lg text-foreground/80 leading-relaxed">
               <p>
-                Imagine a força bruta da natureza capturada em um instante de pura eternidade. A nossa <strong>River Table Azul Centauro</strong> não é apenas um móvel; é um fragmento de rio cristalizado atravessando o coração de uma madeira nobre centenária.
+                Imagine a força bruta da natureza capturada em um instante de pura eternidade. <strong>Este exemplar</strong> da nossa coleção, a River Table Azul Centauro, não é apenas um móvel; é um fragmento de rio cristalizado atravessando o coração de uma madeira nobre centenária.
               </p>
               <p>
-                Os veios naturais e as bordas orgânicas (live edge) contam histórias de sobrevivência e tempo, agora preservadas para sempre sob um fluxo intenso e magnético de resina epóxi na cor <span className="text-gold italic">Azul Centauro</span> — uma tonalidade profunda que reflete a beleza enigmática dos oceanos não mapeados.
+                Os veios naturais e as bordas rústicas e sinuosas da madeira contam histórias de sobrevivência e tempo, agora preservadas para sempre sob um fluxo intenso e magnético de resina epóxi na cor <span className="text-gold italic">Azul Centauro</span> — uma tonalidade profunda que reflete a beleza enigmática dos oceanos não mapeados.
               </p>
               <p>
                 A exclusividade dessa peça se eleva pela arte da finalização. Oferecemos <strong>diversos tipos de acabamentos premium</strong> para que a mesa harmonize perfeitamente com a sua essência:
