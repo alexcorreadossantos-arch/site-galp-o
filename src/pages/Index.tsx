@@ -309,9 +309,9 @@ const Index = () => {
               <div className="p-5 flex flex-col flex-grow">
                 <div className="mb-3">
                   {produto.sub && <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>}
-                  <h3 className="font-display text-xl font-semibold text-foreground">{produto.title}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-foreground">{produto.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
+                <p className="text-base text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
                 <div className="pt-6 mt-auto">
                   <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
                   <button
