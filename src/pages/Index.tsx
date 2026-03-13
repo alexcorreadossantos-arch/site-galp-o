@@ -39,10 +39,10 @@ const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title:
           <img
             src={img}
             alt={`${title} - view ${index + 1}`}
-            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
+            className={`w-full h-full object-cover origin-top-left transition-transform duration-[6000ms] ease-out ${
               imgs.length > 1
-                ? index === currentIndex ? "scale-[1.20]" : "scale-[1.10]"
-                : "scale-[1.10] group-hover:scale-[1.15]"
+                ? index === currentIndex ? "scale-[1.20]" : "scale-[1.12]"
+                : "scale-[1.12] group-hover:scale-[1.18]"
             }`}
           />
         </div>
