@@ -16,7 +16,7 @@ import abridorSlide1 from "@/assets/abridor-slide-1.jpg";
 import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
-import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Instagram, Facebook } from "lucide-react";
 
 const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (imgs: string[], index: number) => void }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -385,21 +385,37 @@ const Index = () => {
           </div>
         </div>
       </section>
+      {/* ── SOCIAL MEDIA ── */}
+      <section className="py-24 border-y border-gold-muted bg-card/30">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Nos siga nas redes sociais
+          </h2>
+          <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-16">
+            Acompanhe nosso dia a dia e criações exclusivas
+          </p>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-20">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500">
+              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
+                <Instagram size={24} />
+              </div>
+              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Instagram</span>
+            </a>
+            
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-75">
+              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
+                <Facebook size={24} />
+              </div>
+              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Facebook</span>
+            </a>
 
-      {/* ── STATS ── */}
-      <section className="py-24 border-y border-gold-muted">
-        <div className="max-w-4xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { value: "+500", label: "Peças Entregues" },
-            { value: "6", label: "Anos de Experiência" },
-            { value: "100%", label: "Artesanal" },
-            { value: "∞", label: "Exclusividade" },
-          ].map((stat) => (
-            <div key={stat.label} className="space-y-2">
-              <p className="font-display text-4xl md:text-5xl font-bold text-gold">{stat.value}</p>
-              <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground">{stat.label}</p>
-            </div>
-          ))}
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-150">
+              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+              </div>
+              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">TikTok</span>
+            </a>
+          </div>
         </div>
       </section>
 
