@@ -12,7 +12,8 @@ import tabua2 from "@/assets/tabua-slide-2.jpg";
 import tabua3 from "@/assets/tabua-slide-3.jpg";
 import tabua4 from "@/assets/tabua-slide-4.jpg";
 import tabua5 from "@/assets/tabua-slide-5.jpg";
-import abridorImg from "@/assets/abridor-magnetico-resina.jpg";
+import abridorSlide1 from "@/assets/abridor-slide-1.jpg";
+import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
 import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn, ZoomOut } from "lucide-react";
@@ -277,9 +278,9 @@ const Index = () => {
               badge: "Premium",
             },
             {
-              imgs: [abridorImg],
+              imgs: [abridorSlide1, abridorSlide2],
               tag: "Exclusivo",
-              title: "Abridor Magnético",
+              title: "Abridor de garrafa magnético",
               sub: "",
               desc: "Abridor de garrafa rustico, com traços únicos, pode ser totalmente customizado. Excelente escolha para o cantinho do churrasco.",
               badge: "Único",
