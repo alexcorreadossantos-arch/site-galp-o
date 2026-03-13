@@ -152,7 +152,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <div className="relative text-center px-6 max-w-5xl mx-auto">
 
 
           <img 
