@@ -1,559 +1,75 @@
-import heroVideo from "@/assets/hero-video-new.mp4";
-import relogioSlide1 from "@/assets/relogio-slide-new-1.jpg";
-import relogioSlide2 from "@/assets/relogio-slide-new-2.jpg";
-import relogioSlide3 from "@/assets/relogio-slide-new-3.jpg";
-import relogioSlide4 from "@/assets/relogio-slide-new-4.jpg";
-import mesaSlide1 from "@/assets/mesa-slide-1.jpg";
-import mesaSlide2 from "@/assets/mesa-slide-2.jpg";
-import mesaSlide3 from "@/assets/mesa-slide-3.jpg";
-import mesaSlide4 from "@/assets/mesa-slide-4.jpg";
-import tabua1 from "@/assets/tabua-slide-1.jpg";
-import tabua2 from "@/assets/tabua-slide-2.jpg";
-import tabua3 from "@/assets/tabua-slide-3.jpg";
-import tabua4 from "@/assets/tabua-slide-4.jpg";
-import tabua5 from "@/assets/tabua-slide-5.jpg";
-import abridorSlide1 from "@/assets/abridor-slide-1.jpg";
-import abridorSlide2 from "@/assets/abridor-slide-2.jpg";
-import riverTableImg from "@/assets/river-table-blue-straight.png";
 import { useEffect, useRef, useState } from "react";
-import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Instagram, Facebook, MapPin } from "lucide-react";
-import logoGalpao from "@/assets/logo-galpao.png";
+import heroVideo from "@/assets/hero-video-new.mp4";
+import riverTableImg from "@/assets/river-table-blue-straight.png";
 
-const ProductImageSlideshow = ({ imgs, title, onZoom }: { imgs: string[], title: string, onZoom: (imgs: string[], index: number) => void }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (imgs.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % imgs.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [imgs.length]);
-
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev === 0 ? imgs.length - 1 : prev - 1));
-  };
-
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % imgs.length);
-  };
-
-  return (
-    <div
-      className="group relative w-full h-full overflow-hidden aspect-square cursor-zoom-in"
-      onClick={() => onZoom(imgs, currentIndex)}
-    >
-      {imgs.map((img, index) => (
-        <div
-          key={img}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-        >
-          <img
-            src={img}
-            alt={`${title} - view ${index + 1}`}
-            className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${imgs.length > 1
-              ? index === currentIndex ? "scale-110" : "scale-100"
-              : "scale-100 group-hover:scale-110"
-              }`}
-          />
-        </div>
-      ))}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
-      {/* Indicators */}
-      {imgs.length > 1 && (
-        <>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-            {imgs.map((_, index) => (
-              <div
-                key={index}
-                className={`h-1 transition-all duration-300 rounded-full ${index === currentIndex ? "w-4 bg-gold" : "w-1 bg-white/30"
-                  }`}
-              />
-            ))}
-          </div>
-
-          {/* Navigation Controls */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40 z-20"
-            aria-label="Previous image"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/40 z-20"
-            aria-label="Next image"
-          >
-            <ChevronRight size={18} />
-          </button>
-        </>
-      )}
-    </div>
-  );
-};
+// Sections
+import HeroSection from "@/components/sections/HeroSection";
+import IntroStrip from "@/components/sections/IntroStrip";
+import FeaturedPiece from "@/components/sections/FeaturedPiece";
+import Collection from "@/components/sections/Collection";
+import Process from "@/components/sections/Process";
+import SocialMedia from "@/components/sections/SocialMedia";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer";
+import Lightbox from "@/components/sections/Lightbox";
 
 const Index = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const featuredRef = useRef<HTMLDivElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [lightboxData, setLightboxData] = useState<{ imgs: string[], index: number } | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const featuredRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      video.addEventListener("canplay", () => setVideoLoaded(true));
+      const handleCanPlay = () => setVideoLoaded(true);
+      video.addEventListener("canplay", handleCanPlay);
+      return () => video.removeEventListener("canplay", handleCanPlay);
     }
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const getParallaxShift = () => {
-    if (!featuredRef.current) return 0;
-    const rect = featuredRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    // Calculate how far through the viewport the element is
-    const elementCenter = rect.top + rect.height / 2;
-    const viewportCenter = windowHeight / 2;
-    const distanceFromCenter = elementCenter - viewportCenter;
-
-    // Return a subtle translation value
-    return distanceFromCenter * 0.1;
+  const handleZoom = (imgs: string[], index: number) => {
+    setLightboxData({ imgs, index });
+    setIsZoomed(false);
   };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* ── HERO ── */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video background */}
-        <video
-          ref={videoRef}
-          src={heroVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 scale-[1.12] origin-center ${videoLoaded ? "opacity-60" : "opacity-0"}`}
-        />
+      <HeroSection 
+        videoRef={videoRef} 
+        heroVideo={heroVideo} 
+        videoLoaded={videoLoaded} 
+      />
 
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+      <IntroStrip />
 
-        {/* Hero Content */}
-        <div className="relative text-center px-6 max-w-5xl mx-auto">
+      <FeaturedPiece 
+        featuredRef={featuredRef} 
+        riverTableImg={riverTableImg} 
+        onZoom={handleZoom}
+      />
 
+      <Collection onZoom={handleZoom} />
 
-          <img
-            src={logoGalpao}
-            alt="Galpão 360 Logo"
-            className={`w-full max-w-[120px] md:max-w-[150px] mx-auto mb-6 mix-blend-screen contrast-150 brightness-[1.15] transition-all duration-1000 ease-out delay-300 ${videoLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
-          />
-          <h1 className="font-display text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight">
-            <span className="block text-foreground">Galpão 360</span>
-            <span className="block text-gold italic font-normal text-5xl md:text-7xl mt-2">
-              Wood Studio
-            </span>
-          </h1>
+      <Process />
 
-          <p className="font-elegant text-xl md:text-2xl font-light text-foreground/70 mt-6 mb-10 italic tracking-wide">
-            A exclusividade da natureza refletindo a sua personalidade.
-          </p>
+      <SocialMedia />
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => document.getElementById('colecao')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold"
-            >
-              Ver Coleção
-            </button>
-            <button
-              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4 border border-gold-muted text-gold font-light tracking-[0.15em] uppercase text-sm transition-all duration-300 hover:border-gold hover:bg-[hsl(var(--gold)/0.08)]"
-            >
-              Solicitar Orçamento
-            </button>
-          </div>
-        </div>
+      <Contact />
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent to-[hsl(var(--gold)/0.5)]" />
-          <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-        </div>
-      </section>
+      <Footer />
 
-      {/* ── INTRO STRIP ── */}
-      <section className="py-6 border-y border-gold-muted overflow-hidden">
-        <div className="w-full flex flex-wrap gap-8 md:gap-16 justify-center items-center px-4">
-          {["Peças Exclusivas", "Madeira Natural", "Acabamento Artesanal"].map((item, i) => (
-            <div key={i} className="flex items-center gap-8 md:gap-16">
-              <span className="text-xs tracking-[0.3em] uppercase text-muted-foreground whitespace-nowrap">
-                {item}
-              </span>
-              {i < 2 && <span className="text-gold text-xs">✦</span>}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── FEATURED PIECE ── */}
-      <section className="py-28 px-6 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative group" ref={featuredRef}>
-            <div className="absolute -inset-1 bg-gradient-gold opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500" />
-            <div
-              className="relative overflow-hidden border border-gold-muted aspect-video cursor-zoom-in"
-              onClick={() => { setLightboxData({ imgs: [riverTableImg], index: 0 }); setIsZoomed(false); }}
-            >
-              <img
-                src={riverTableImg}
-                alt="Peça Destaque River Table"
-                className="w-full h-[120%] object-cover animate-ken-burns absolute -top-[10%]"
-                style={{
-                  transform: `translateY(${getParallaxShift()}px) scale(1.1)`
-                }}
-              />
-              {/* Shimmer Effect for a "live" feel */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-                <span className="text-xs text-gold tracking-widest uppercase">Peça Exclusiva</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="space-y-8">
-            <div>
-              <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Destaque da Coleção</p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-                Mesa River Table
-                <span className="block italic font-normal text-gold text-3xl mt-1">cor Azul Centauro</span>
-              </h2>
-            </div>
-
-            <div className="space-y-6 font-elegant text-lg text-foreground/80 leading-relaxed">
-              <p>
-                Imagine a força bruta da natureza capturada em um instante de pura eternidade. <strong>Este exemplar</strong> da nossa coleção, a River Table Azul Centauro, não é apenas um móvel; é uma união ousada entre o peso visual da madeira maciça e a modernidade vibrante do epóxi.
-              </p>
-              <p>
-                Os veios naturais e as bordas trabalhadas e elegantes da madeira contam histórias de sobrevivência e tempo, valorizadas pelo acabamento sólido e pela profundidade da resina epóxi em sua tonalidade <span className="text-gold italic">Azul Centauro</span>.
-              </p>
-              <p>
-                A exclusividade dessa peça se eleva pela arte da finalização. Oferecemos <strong>diversos tipos de acabamentos premium</strong> para que a mesa harmonize perfeitamente com a sua essência:
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-              {[
-                { label: "Acabamento Alto Brilho", value: "Efeito vitrificado e reflexivo, puro luxo." },
-                { label: "Acetinado Fosco", value: "Toque de seda, evidenciando a textura natural." },
-                { label: "Design Personalizado", value: "Bordas, pés e layout 100% sob medida para você." },
-              ].map((spec) => (
-                <div key={spec.label} className="border border-[hsl(var(--border))] p-5 bg-card/50 hover:border-gold transition-colors duration-300">
-                  <p className="text-xs text-gold tracking-widest uppercase mb-2">{spec.label}</p>
-                  <p className="text-sm font-light text-foreground/80">{spec.value}</p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── COLEÇÃO ── */}
-      <section id="colecao" className="py-28 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Feito à Mão, Peça por Peça</p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-            Nossa Coleção
-            <span className="block italic font-normal text-gold text-3xl mt-1">Exclusiva</span>
-          </h2>
-          <p className="font-elegant text-lg text-foreground/60 mt-4 max-w-xl mx-auto">
-            Cada peça é única — combinações que não se repetem
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              imgs: [mesaSlide1, mesaSlide2, mesaSlide3, mesaSlide4],
-              tag: "Destaque",
-              title: "River Table",
-              sub: "",
-              desc: "Mesa jantar. Peça principal da coleção, totalmente exclusiva. Valoriza o ambiente.",
-              badge: "Sob Medida",
-            },
-            {
-              imgs: [relogioSlide1, relogioSlide2, relogioSlide3, relogioSlide4],
-              tag: "Novo",
-              title: "Relógio de Parede",
-              sub: "",
-              desc: "Um mundo de possibilidades em cores, texturas e 3 tamanhos disponíveis: 35cm, 45cm ou 55cm de diâmetro. Uma arte funcional na parede da sua casa.",
-              badge: "Artesanal",
-            },
-            {
-              imgs: [tabua1, tabua2, tabua3, tabua4, tabua5],
-              tag: "Popular",
-              title: "Tábua de Churrasco",
-              sub: "",
-              desc: "Tábua em madeira que pode ser personalizada em vários formatos. Perfeita para presentear.",
-              badge: "Premium",
-            },
-            {
-              imgs: [abridorSlide1, abridorSlide2],
-              tag: "Exclusivo",
-              title: "Abridor de garrafa magnético",
-              sub: "",
-              desc: "Abridor de garrafa rustico, com traços únicos, pode ser totalmente customizado. Excelente escolha para o cantinho do churrasco.",
-              badge: "Único",
-            },
-          ].map((produto) => (
-            <div key={produto.title} className="group relative overflow-hidden border border-gold-muted bg-card hover:border-gold transition-all duration-500 flex flex-col">
-              {/* Image / Slideshow */}
-              <div className="relative">
-                <ProductImageSlideshow
-                  imgs={produto.imgs}
-                  title={produto.title}
-                  onZoom={(imgs, index) => { setLightboxData({ imgs, index }); setIsZoomed(false); }}
-                />
-
-                {/* Tag Overlays */}
-                <div className="absolute top-3 left-3 z-20">
-                  <span className="text-[10px] tracking-[0.25em] uppercase px-2 py-1 bg-[hsl(var(--gold)/0.15)] border border-gold-muted text-gold backdrop-blur-sm">
-                    {produto.tag}
-                  </span>
-                </div>
-                <div className="absolute top-3 right-3 z-20">
-                  <span className="text-[10px] tracking-widest uppercase px-2 py-1 bg-background/80 text-muted-foreground border border-[hsl(var(--border))] backdrop-blur-sm">
-                    {produto.badge}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-5 flex flex-col flex-grow">
-                <div className="mb-3">
-                  {produto.sub && <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-1">{produto.sub}</p>}
-                  <h3 className="font-display text-xl font-semibold text-foreground">{produto.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground font-elegant leading-relaxed flex-grow">{produto.desc}</p>
-                <div className="pt-6 mt-auto">
-                  <div className="w-full h-px bg-gradient-to-r from-gold-muted to-transparent mb-4" />
-                  <button
-                    onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="w-full py-2.5 border border-gold-muted text-gold text-xs tracking-[0.2em] uppercase font-light hover:bg-[hsl(var(--gold)/0.08)] hover:border-gold transition-all duration-300"
-                  >
-                    Solicitar Orçamento
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── PROCESS ── */}
-      <section className="py-24 bg-card">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.4em] text-gold uppercase mb-3">Nossa Essência</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold">O Processo Artesanal</h2>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Seleção da Madeira", desc: "Escolhemos madeiras com veios únicos e história, respeitando cada característica natural." },
-              { step: "02", title: "Preparação & Cura", desc: "Secagem controlada para garantir estabilidade estrutural e preservar a beleza da madeira." },
-              { step: "03", title: "Aplicação da Resina", desc: "Resina epóxi de qualidade aplicada em camadas em ambiente controlado, criando profundidade e luminosidade únicas." },
-              { step: "04", title: "Polimento Premium", desc: "Acabamento artesanal que revela todos os detalhes, com proteção duradoura e toque de seda." },
-            ].map((item) => (
-              <div key={item.step} className="group relative">
-                <div className="text-6xl font-display font-bold text-[hsl(var(--gold)/0.12)] mb-4 group-hover:text-[hsl(var(--gold)/0.2)] transition-colors duration-300">
-                  {item.step}
-                </div>
-                <div className="w-8 h-px bg-gold mb-4" />
-                <h3 className="font-display text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed font-elegant">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SOCIAL MEDIA ── */}
-      <section className="py-24 border-y border-gold-muted bg-card/30">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Nos siga nas redes sociais
-          </h2>
-          <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-16">
-            Acompanhe nosso dia a dia e criações exclusivas
-          </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20">
-            <a href="https://www.instagram.com/galpao360.woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500">
-              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
-                <Instagram size={24} />
-              </div>
-              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Instagram</span>
-            </a>
-
-            <a href="https://www.facebook.com/galpão360woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-75">
-              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
-                <Facebook size={24} />
-              </div>
-              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">Facebook</span>
-            </a>
-
-            <a href="https://tiktok.com/@galpao360woodstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-5 transition-transform hover:-translate-y-2 duration-500 delay-150">
-              <div className="w-16 h-16 rounded-full border border-gold-muted bg-background flex items-center justify-center text-gold group-hover:border-gold group-hover:bg-[hsl(var(--gold)/0.05)] group-hover:shadow-[0_0_20px_rgba(186,160,111,0.2)] transition-all duration-300">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-              </div>
-              <span className="text-xs tracking-widest uppercase text-foreground/60 font-light group-hover:text-gold transition-colors duration-300">TikTok</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section id="contato" className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--gold)/0.05)] via-[hsl(var(--gold)/0.02)] to-[hsl(var(--gold)/0.05)]" />
-        <div className="relative max-w-3xl mx-auto text-center space-y-8">
-          <p className="text-xs tracking-[0.4em] text-gold uppercase">Sua Peça Única Aguarda</p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold leading-tight">
-            Transforme Madeira
-            <span className="block italic font-normal text-gold mt-2">em Obra de Arte</span>
-          </h2>
-          <p className="font-elegant text-lg text-foreground/60 max-w-xl mx-auto">
-            Entre em contato e transformamos sua ideia em peça exclusiva.
-            Cada projeto é único, como você.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <a href="https://wa.me/5554996043029" className="px-12 py-5 bg-gradient-gold text-primary-foreground font-semibold tracking-[0.2em] uppercase text-sm transition-all duration-300 hover:opacity-90 hover:scale-105 shadow-gold inline-block">
-              WhatsApp Studio
-            </a>
-            <a href="mailto:contato@galpao360.com" className="px-12 py-5 border border-gold-muted text-gold font-light tracking-[0.2em] uppercase text-sm transition-all duration-300 hover:border-gold inline-block">
-              Enviar E-mail
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-gold-muted py-12 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-6">
-          <div className="flex flex-col gap-1 items-center">
-            <p className="font-display text-lg font-bold text-foreground">
-              Galpão 360 <span className="text-gold italic font-normal">Wood Studio</span>
-            </p>
-            <p className="text-xs text-muted-foreground tracking-wider">
-              Madeira Natural · Resina Epóxi · Design Exclusivo
-            </p>
-          </div>
-          
-          <a 
-            href="https://www.google.com/maps/search/?api=1&query=Vrs+826+km14%2C+Alto+Feliz+RS+-+Rio+Grande+do+sul+-+Brasil"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-gold transition-all duration-300 bg-background/20 px-4 py-2 rounded-full border border-gold/10 cursor-pointer hover:scale-105"
-          >
-            <MapPin size={14} className="text-gold" />
-            <p className="text-xs tracking-wide">
-              Vrs 826 km14, Alto Feliz RS - Rio Grande do sul - Brasil
-            </p>
-          </a>
-
-          <p className="text-xs text-muted-foreground tracking-widest mt-2">
-            © 2024 Galpão 360 Wood Studio · Todos os direitos reservados
-          </p>
-        </div>
-      </footer>
-      {/* ── LIGHTBOX ── */}
-      {lightboxData && (
-        <div
-          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
-        >
-          {/* Controls */}
-          <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
-            <button
-              className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
-              onClick={() => setIsZoomed(!isZoomed)}
-              title={isZoomed ? "Zoom Out" : "Zoom In"}
-            >
-              {isZoomed ? <ZoomOut size={24} /> : <ZoomIn size={24} />}
-            </button>
-            <button
-              className="text-gold hover:text-white transition-colors p-2 bg-background/40 backdrop-blur-sm rounded-full"
-              onClick={() => {
-                setLightboxData(null);
-                setIsZoomed(false);
-              }}
-            >
-              <X size={24} />
-            </button>
-          </div>
-
-          <div
-            className={`relative w-full h-full flex items-center justify-center overflow-hidden cursor-move transition-all duration-500 rounded-lg`}
-            onClick={() => !isZoomed && setLightboxData(null)}
-          >
-            {/* Nav Left */}
-            {!isZoomed && lightboxData.imgs.length > 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLightboxData(prev => prev ? { ...prev, index: prev.index === 0 ? prev.imgs.length - 1 : prev.index - 1 } : null);
-                }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/80 transition-all z-20"
-                aria-label="Previous image"
-              >
-                <ChevronLeft size={28} />
-              </button>
-            )}
-
-            <img
-              src={lightboxData.imgs[lightboxData.index]}
-              alt="Enlarged View"
-              className={`max-w-full max-h-full object-contain shadow-2xl border border-gold/20 transition-transform duration-500 ease-in-out ${isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsZoomed(!isZoomed);
-              }}
-            />
-
-            {/* Nav Right */}
-            {!isZoomed && lightboxData.imgs.length > 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLightboxData(prev => prev ? { ...prev, index: (prev.index + 1) % prev.imgs.length } : null);
-                }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/80 transition-all z-20"
-                aria-label="Next image"
-              >
-                <ChevronRight size={28} />
-              </button>
-            )}
-          </div>
-        </div>
-      )}
+      <Lightbox 
+        lightboxData={lightboxData}
+        isZoomed={isZoomed}
+        setIsZoomed={setIsZoomed}
+        onClose={() => setLightboxData(null)}
+        setLightboxData={setLightboxData}
+      />
     </div>
   );
 };
 
 export default Index;
+
