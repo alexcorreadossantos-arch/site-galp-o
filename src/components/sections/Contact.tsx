@@ -36,12 +36,11 @@ const Contact = () => {
         outro: "Tenho uma idéia"
       }[formState.categoria] || "Projeto Especial",
       resina_formatada: {
-        azul_centauro: "Azul Centauro",
-        esmeralda: "Verde Esmeralda",
-        transparente: "Cristal Puro",
-        preto_ebano: "Preto Ébano",
-        personalizada: "Cor Personalizada"
-      }[formState.resina] || "Personalizada"
+        vitrificado: "Efeito Vitrificado (Alto Brilho)",
+        acetinado: "Efeito Acetinado (Semi Brilho)",
+        fosco: "Efeito Fosco (Sem Brilho)",
+        duvida: "Estou em dúvida"
+      }[formState.resina] || "Não definido"
     };
 
     try {
@@ -153,11 +152,10 @@ const Contact = () => {
                       <SelectValue placeholder="Selecione" />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-gold-muted text-foreground">
-                      <SelectItem value="azul_centauro">Azul Centauro (Destaque)</SelectItem>
-                      <SelectItem value="esmeralda">Verde Esmeralda</SelectItem>
-                      <SelectItem value="transparente">Cristal Puro</SelectItem>
-                      <SelectItem value="preto_ebano">Preto Ébano</SelectItem>
-                      <SelectItem value="personalizada">Cor Personalizada</SelectItem>
+                      <SelectItem value="vitrificado">Efeito Vitrificado (Alto Brilho)</SelectItem>
+                      <SelectItem value="acetinado">Efeito Acetinado (Semi Brilho)</SelectItem>
+                      <SelectItem value="fosco">Efeito Fosco (Sem Brilho)</SelectItem>
+                      <SelectItem value="duvida">Estou em dúvida</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
