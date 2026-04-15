@@ -2,8 +2,9 @@ name: Deploy Lovable via FTP na Hostinger
 
 on:
  push:
- branches: [main]
- workflow_dispatch: {}
+ branches:
+ - main
+ workflow_dispatch:
 
 jobs:
  build-and-deploy:
