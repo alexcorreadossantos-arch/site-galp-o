@@ -242,9 +242,9 @@ const Contact = () => {
             <MessageSquare size={16} className="group-hover:scale-110 transition-transform" />
             WhatsApp Direto
           </a>
-          <a href="mailto:contato@galpao360.com" className="flex items-center gap-2 text-gold hover:text-white transition-colors text-xs tracking-widest uppercase group">
+          <a href="mailto:contato@galpao360woodstudio.com.br" className="flex items-center gap-2 text-gold hover:text-white transition-colors text-xs tracking-widest uppercase group">
             <Send size={16} className="group-hover:scale-110 transition-transform" />
-            contato@galpao360.com
+            contato@galpao360woodstudio.com.br
           </a>
         </div>
       </div>

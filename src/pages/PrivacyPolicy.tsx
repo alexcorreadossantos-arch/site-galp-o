@@ -126,7 +126,7 @@ const PrivacyPolicy = () => {
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="space-y-2 text-center md:text-left">
                 <p className="text-sm font-semibold text-gold tracking-widest uppercase">Contato Encarregado de Dados</p>
-                <p className="text-sm italic">contato@galpao360.com</p>
+                <p className="text-sm italic">contato@galpao360woodstudio.com.br</p>
               </div>
               <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
                 Última atualização: Março de 2024
