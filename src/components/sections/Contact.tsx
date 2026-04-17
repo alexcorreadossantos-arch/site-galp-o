@@ -62,9 +62,10 @@ const Contact = () => {
       toast.success("Projeto enviado! Analisaremos os detalhes agora mesmo.");
       setIsSubmitting(false);
       setIsSubmitted(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro no processamento:", error);
-      toast.error("Ocorreu um erro ao processar. Mas não se preocupe, tentaremos novamente.");
+      const errorMessage = error?.text || error?.message || "Serviço indisponível";
+      toast.error(`Erro EmailJS: ${errorMessage}. Verifique as credenciais e as permissões de domínio (localhost).`);
       setIsSubmitting(false);
     }
   };
